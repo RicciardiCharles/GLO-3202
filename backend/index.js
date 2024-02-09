@@ -6,10 +6,10 @@ const cors = require('cors');
 const session = require('express-session');
 const cookieParser = require('cookie-parser');
 const app = express();
+const path = require('path');
 const { v4: uuidv4 } = require('uuid');
 require('dotenv').config();
 const PORT = process.env.BACKEND_PORT;
-
 
 // Mise en place des middlewares
 app.use(cors({
@@ -43,6 +43,7 @@ app.get('/getGrid', (req, res) => {
     }
 
     const userId = req.session.userId;
+
     // Si l'utilisateur est connecté on récupère sa grille
     try {
         const usersData = JSON.parse(fs.readFileSync(usersFilePath, 'utf8'));
@@ -56,8 +57,7 @@ app.get('/getGrid', (req, res) => {
             // Si l'utilisateur n'a pas de grille on lui en crée une
             return res.json(createInitialGrid());
         }
-
-        res.json(user.grid);
+        return res.json(user.grid);
     } catch (error) {
         console.error('Error retrieving the grid:', error);
         res.status(500).send('Failed to retrieve the grid');
@@ -168,6 +168,11 @@ app.get('/logout', (req, res) => {
         res.send('Logged out');
     });
 });
+
+app.use(express.static(path.join(__dirname, 'build')));
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, 'build', 'index.html'));
+  });
 
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
