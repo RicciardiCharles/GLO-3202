@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+const ip = process.env.REACT_APP_BACKEND_URL;
 
 function Register() {
     const navigate = useNavigate();
@@ -30,7 +31,7 @@ function Register() {
             return;
         }
         try {
-            const response = await fetch('http://localhost:3001/register', {
+            const response = await fetch(`{ip}/register`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

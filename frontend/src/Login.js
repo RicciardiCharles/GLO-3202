@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+const ip = process.env.REACT_APP_BACKEND_URL;
 
 function Login() {
     const [email, setEmail] = useState('');
@@ -10,7 +11,7 @@ function Login() {
     const handleSubmit = async (event) => {
         event.preventDefault();
         try {
-            const response = await fetch('http://localhost:3001/login', {
+            const response = await fetch(`${ip}/login`, {
                 method: 'POST',
                 credentials: 'include',
                 headers: {
