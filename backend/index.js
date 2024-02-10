@@ -9,7 +9,7 @@ const app = express();
 const path = require('path');
 const { v4: uuidv4 } = require('uuid');
 require('dotenv').config();
-const PORT = process.env.BACKEND_PORT;
+const PORT = process.env.PORT;
 
 // Mise en place des middlewares
 app.use(cors({
@@ -174,7 +174,7 @@ app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, 'build', 'index.html'));
   });
 
-app.listen(PORT, '::', () => {
-    console.log(`Server running on port [::]${PORT}`);
+app.listen(PORT, "0.0.0.0", () => {
+    console.log(`Server running on port 0.0.0.0${PORT}`);
 });
 
