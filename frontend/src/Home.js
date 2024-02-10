@@ -12,7 +12,7 @@ const generateRandomColor = () => {
 
 const saveGrid = async (grid) => {
     try {
-        const response = await fetch(`${ip}/saveGrid`, {
+        const response = await fetch(`/saveGrid`, {
             method: 'POST',
             credentials: 'include',
             headers: {
@@ -57,7 +57,7 @@ const Home = () => {
 
     const logout = async () => {
         try {
-            const response = await fetch(`${ip}/logout`, {
+            const response = await fetch(`/logout`, {
                 method: 'GET',
                 credentials: 'include',
             });
@@ -119,7 +119,7 @@ const Home = () => {
     useEffect(() => {
         const fetchGrid = async () => {
             try {
-                const response = await fetch(`${ip}/getGrid`, {
+                const response = await fetch(`/getGrid`, {
                     method: 'GET',
                     credentials: 'include',
                 });
