@@ -21,6 +21,7 @@ function Register() {
 
     // Gestion du formulaire d'inscription
     const handleSubmit = async (event) => {
+        console.log('ip : ', ip);
         event.preventDefault();
         if (!formData.email.match(/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/)) { // Regex pour vérifier que l'email est valide
             console.log("Invalid email address.");
