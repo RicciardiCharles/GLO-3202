@@ -5,6 +5,7 @@ const ip = process.env.REACT_APP_BACKEND_URL;
 function Login() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [errorMessage, setErrorMessage] = useState('');
     const navigate = useNavigate();
 
     // Gère l'envoi du formulaire de connexion
@@ -22,10 +23,13 @@ function Login() {
             if (response.ok) {
                 navigate('/home');
             } else {
+                const errorText = await response.text();
+                setErrorMessage(errorText || 'Login failed');
                 console.log('Login failed');
             }
         } catch (error) {
             console.error('Error: ', error);
+            setErrorMessage('An error occurred. Please try again.');
         }
     };
 
@@ -33,6 +37,9 @@ function Login() {
         <div className="min-h-screen flex flex-col justify-center items-center bg-gray-100">
             <h2 className="text-2xl font-bold mb-6">Login Page</h2>
             <form onSubmit={handleSubmit} className="w-full max-w-sm">
+                {errorMessage && (
+                    <div className="mb-4 text-sm font-semibold text-red-500">{errorMessage}</div>
+                )}
                 <div className="mb-4">
                     <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="email">
                         Email:

@@ -10,6 +10,7 @@ function Register() {
         email: '',
         phoneNumber: '',
     });
+    const [errorMessage, setErrorMessage] = useState('');
 
     const handleChange = (event) => {
         const { name, value } = event.target;
@@ -21,7 +22,6 @@ function Register() {
 
     // Gestion du formulaire d'inscription
     const handleSubmit = async (event) => {
-        console.log('ip : ', ip);
         event.preventDefault();
         if (!formData.email.match(/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/)) { // Regex pour vérifier que l'email est valide
             console.log("Invalid email address.");
@@ -43,10 +43,13 @@ function Register() {
                 console.log('Registration successful');
                 navigate('/login');
             } else {
+                const errorText = await response.text();
+                setErrorMessage(errorText || 'Registration failed, email is already used');
                 console.log('Registration failed');
             }
         } catch (error) {
             console.error('Error: ', error);
+            setErrorMessage('An error occurred. Please try again.');
         }
     };
 
@@ -54,6 +57,9 @@ function Register() {
         <div className="max-w-md mx-auto my-10 bg-white p-8 rounded-lg shadow">
             <h2 className="text-2xl font-bold text-center mb-6">Registration Page</h2>
             <form onSubmit={handleSubmit} className="space-y-4">
+                {errorMessage && (
+                    <div className="mb-4 text-sm font-semibold text-red-500">{errorMessage}</div>
+                )}
                 <div>
                     <label className="block mb-2 font-semibold">Username:</label>
                     <input

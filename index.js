@@ -10,6 +10,7 @@ const path = require('path');
 const { v4: uuidv4 } = require('uuid');
 require('dotenv').config();
 const PORT = process.env.PORT || 3000;
+const secretKey = process.env.SECRET_KEY;
 
 // Mise en place des middlewares
 app.use(cors({
@@ -19,7 +20,7 @@ app.use(cors({
 app.use(bodyParser.json());
 app.use(cookieParser());
 app.use(session({
-    secret: 'your_secret_key',
+    secret: secretKey,
     resave: false,
     saveUninitialized: false,
     cookie: {
