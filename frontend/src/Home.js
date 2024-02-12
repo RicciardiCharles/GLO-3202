@@ -184,40 +184,47 @@ const Home = () => {
                 ))}
             </div>
             {isModalOpen && (
-                <div className="modal">
-                    <div className="modal-content">
-                        <form onSubmit={handleFormSubmit}>
-                            <label>
-                                Random Coloring:
-                                <input
-                                    type="checkbox"
-                                    name="randomColoring"
-                                    checked={formValues.randomColoring}
-                                    onChange={handleFormChange}
-                                />
-                            </label>
-                            <label>
-                                Brush Radius:
-                                <input
-                                    type="range"
-                                    name="brushRadius"
-                                    min="1"
-                                    max="5"
-                                    value={formValues.brushRadius}
-                                    onChange={handleFormChange}
-                                />
-                            </label>
-                            <label>
-                                Grid Title:
-                                <input
-                                    type="text"
-                                    name="gridTitle"
-                                    value={formValues.gridTitle}
-                                    onChange={handleFormChange}
-                                />
-                            </label>
-                            <button type="submit">Save</button>
-                        </form>
+                <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
+                    <div className="modal">
+                        <div className="modal-content bg-white p-4 rounded-lg shadow-lg">
+                            <form className="space-y-4" onSubmit={handleFormSubmit}>
+                                <label className="block text-sm font-medium text-gray-700">
+                                    Random Coloring:
+                                    <input
+                                        className='border-2 border-blue-500 rounded-md m-2'
+                                        type="checkbox"
+                                        name="randomColoring"
+                                        checked={formValues.randomColoring}
+                                        onChange={handleFormChange}
+                                    />
+                                </label>
+                                <label className="block text-sm font-medium text-gray-700">
+                                    Brush Radius:
+                                    <input
+                                        className='border-2 border-blue-500 rounded-md m-2'
+                                        type="range"
+                                        name="brushRadius"
+                                        min="1"
+                                        max="10"
+                                        value={formValues.brushRadius}
+                                        onChange={handleFormChange}
+                                    />
+                                </label>
+                                <label className="block text-sm font-medium text-gray-700">
+                                    Grid Title:
+                                    <input
+                                        type="text"
+                                        name="gridTitle"
+                                        className='border-2 border-blue-500 rounded-md m-2'
+                                        value={formValues.gridTitle}
+                                        onChange={handleFormChange}
+                                    />
+                                </label>
+                                <div className='flex justify-end'>
+                                    <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded centered mx-3" type="submit">Save</button>
+                                </div>
+                            </form>
+                        </div>
                     </div>
                 </div>
             )}
