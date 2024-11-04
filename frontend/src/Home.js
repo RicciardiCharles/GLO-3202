@@ -126,7 +126,10 @@ const Home = () => {
                 if (response.ok) {
                     const savedGrid = await response.json();
                     setGrid(savedGrid);
-                } else {
+                } else if (response.status === 401) {
+                    window.location.href = '/login';
+                }
+                else {
                     console.log('No grid found, using default grid');
                 }
             } catch (error) {
@@ -156,6 +159,31 @@ const Home = () => {
         });
     };
 
+    const navigateToProfile = () => {
+        window.location.href = '/profile';
+    }
+
+    // Envoi la grille au serveur pour qu'elle apparaisse dans la galerie
+    const publishGrid = async () => {
+        try {
+            const response = await fetch(`/publishGrid`, {
+                method: 'POST',
+                credentials: 'include',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ grid: grid }),
+            });
+
+            if (response.ok) {
+                console.log('Grid published successfully');
+            } else {
+                console.log('Failed to publish the grid');
+            }
+        } catch (error) {
+            console.error('Error: ', error);
+        }
+    }
 
     return (
         <div className="flex column flex-wrap justify-evenly  content-center ">
@@ -164,6 +192,8 @@ const Home = () => {
                 <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded centered mx-3" onClick={() => saveGrid(grid)}>Save Grid</button>
                 <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded centered mx-3" onClick={() => openFormParameters()}>Set parameters</button>
                 <button className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded mx-3" onClick={clearGrid}>Clear Grid</button>
+                <button id="profile" className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mx-3" onClick={() => navigateToProfile()}>Profile</button>
+                <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded centered mx-3" onClick={() => publishGrid()}>Publish</button>
             </div>
             <div className="border-2 border-black">
                 {grid.map((row, rowIndex) => (

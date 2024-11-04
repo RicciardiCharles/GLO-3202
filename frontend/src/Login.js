@@ -8,7 +8,7 @@ function Login() {
     const [errorMessage, setErrorMessage] = useState('');
     const navigate = useNavigate();
 
-    // Gère l'envoi du formulaire de connexion
+    // Gère l'envoi du formulaire de connexion et affiche les messages d'erreur
     const handleSubmit = async (event) => {
         event.preventDefault();
         try {

@@ -1,5 +1,10 @@
-Projet fullstack simple
+To start project :
 
-Application web React sur laquelle l'utilisateur peut s'inscrire et se connecter
-L'application permet de réaliser des canvas et de les sauvegarder
-Le stockage coté back se fait dans des fichiers json
+Start a MongoDB server with a database containing a 'users' and a 'gallery' collections.
+Add the database connection informations in the .env
+
+Install dependancies:
+npm install
+
+Run the server:
+node index.js

@@ -20,19 +20,35 @@ function Register() {
         }));
     };
 
+    // Vérifie le contenu des champs
+    const validateInputs = () => {
+        if (!formData.email.match(/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/)) {
+            setErrorMessage("Invalid email address.");
+            return false;
+        }
+        if (!formData.phoneNumber.match(/^\d{10}$/)) {
+            setErrorMessage("Invalid phone number. Must be 10 digits.");
+            return false;
+        }
+        return true;
+    };
+
     // Gestion du formulaire d'inscription
     const handleSubmit = async (event) => {
         event.preventDefault();
-        if (!formData.email.match(/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/)) { // Regex pour vérifier que l'email est valide
-            console.log("Invalid email address.");
+
+        // Reset le message d'erreur
+        setErrorMessage('');
+
+        // Vérifie le contenu des champs
+        if (!validateInputs()) {
+            console.log(errorMessage);
             return;
         }
-        if (!formData.phoneNumber.match(/^\d{10}$/)) { // Regex pour vérifier que le numéro de téléphone est valide
-            console.log("Invalid phone number. Must be 10 digits.");
-            return;
-        }
+
+        // Envoi la requête d'inscription
         try {
-            const response = await fetch('/register', {
+            const response = await fetch(`/register`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -40,11 +56,11 @@ function Register() {
                 body: JSON.stringify(formData),
             });
             if (response.ok) {
-                console.log('Registration successful');
+                // Redirige l'utilisateur vers la page de connexion
                 navigate('/login');
             } else {
                 const errorText = await response.text();
-                setErrorMessage(errorText || 'Registration failed, email is already used');
+                setErrorMessage(errorText || 'Registration failed, please try again.');
                 console.log('Registration failed');
             }
         } catch (error) {

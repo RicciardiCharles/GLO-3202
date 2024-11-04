@@ -1,0 +1,41 @@
+Nom complet: Ricciardi Charles
+Numéro de dossier (NI): 537181593
+Estimation du temps de réalisation: 6H
+
+Fonctionnalités
+---------------
+/10 : Rapport PDF
+    Commentaires :
+
+/10 : Page d'inscription fonctionnelle avec validation des données
+    Commentaires :
+
+/10 : Page de connexion fonctionnelle avec validation des données
+    Commentaires :
+
+/10 : Ensemble de pages publiquement accessibles
+    Commentaires :
+
+/10 : Ensemble de pages accessibles uniquement aux utilisateurs authentifiés
+    Commentaires :
+
+/5 : Gestion des erreurs
+    Commentaires :
+
+/5 : Qualité du code (utilisation des bonnes pratiques de développement, noms de variables, style, commentaires, etc).
+    Commentaires :
+
+
+
+Pénalités pour non-respect des consignes
+----------------------------------------
+
+
+
+Autres commentaires du correcteur
+---------------------------------
+
+
+
+Total: /60
+
